@@ -83,6 +83,10 @@ module MacCPUs
     type == :intel ? :x86_64 : :ppc64
   end
 
+  def universal_archs
+    [arch_32_bit, arch_64_bit]
+  end
+
   def altivec?
     @altivec ||= sysctl_bool('hw.optional.altivec')
   end
