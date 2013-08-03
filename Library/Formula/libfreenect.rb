@@ -15,7 +15,7 @@ class Libfreenect < Formula
   def install
     if build.universal?
       ENV.universal_binary
-      ENV['CMAKE_OSX_ARCHITECTURES'] = "i386;x86_64"
+      ENV['CMAKE_OSX_ARCHITECTURES'] = Hardware::CPU.universal_archs.join(';')
     end
     mkdir "build" do
       system "cmake", "..", *std_cmake_args

@@ -24,9 +24,9 @@ class RubyOdbc < Formula
         # apparently because unixODBC is compiled for only x86_64 and ruby-odbc
         # and iODBC are both i386 and x86_64. The solution (which works for me on Snow Leopard)
         # is to remove i386 references from ruby-odbc's makefile. YMMV.
-        s.change_make_var! "CFLAGS", "-fno-common -arch x86_64 -g -Os -pipe -DENABLE_DTRACE $(cflags)"
-        s.change_make_var! "ldflags", "-L. -arch x86_64"
-        s.change_make_var! "LDSHARED", "cc -arch x86_64 -pipe -bundle -undefined dynamic_lookup"
+        s.change_make_var! "CFLAGS", "-fno-common -arch #{MacOS.preferred_arch} -g -Os -pipe -DENABLE_DTRACE $(cflags)"
+        s.change_make_var! "ldflags", "-L. -arch #{MacOS.preferred_arch}"
+        s.change_make_var! "LDSHARED", "cc -arch #{MacOS.preferred_arch} -pipe -bundle -undefined dynamic_lookup"
         s.change_make_var! "LIBS", "$(LIBRUBYARG_SHARED) -lodbcinst -lodbc  -lpthread -ldl"
       end
     end
