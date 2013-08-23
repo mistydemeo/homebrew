@@ -1,6 +1,15 @@
 class Version
   include Comparable
 
+  # Returned by compiler version methods when the compiler isn't available
+  class NULL
+    class << self
+      include Comparable
+      def <=>(other); -1 end
+      def nil?; true; end
+    end
+  end
+
   class Token
     include Comparable
 

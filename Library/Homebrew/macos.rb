@@ -116,6 +116,8 @@ module MacOS extend self
     @gcc_40_build_version ||=
       if (path = locate("gcc-4.0"))
         %x{#{path} --version}[/build (\d{4,})/, 1].to_i
+      else
+        Version::NULL
       end
   end
   alias_method :gcc_4_0_build_version, :gcc_40_build_version
@@ -124,6 +126,8 @@ module MacOS extend self
     @gcc_42_build_version ||=
       if (path = locate("gcc-4.2")) && path.realpath.basename.to_s !~ /^llvm/
         %x{#{path} --version}[/build (\d{4,})/, 1].to_i
+      else
+        Version::NULL
       end
   end
   alias_method :gcc_build_version, :gcc_42_build_version
@@ -134,6 +138,8 @@ module MacOS extend self
     @llvm_build_version ||=
       if (path = locate("llvm-gcc")) && path.realpath.basename.to_s !~ /^clang/
         %x{#{path} --version}[/LLVM build (\d{4,})/, 1].to_i
+      else
+        Version::NULL
       end
   end
 
@@ -141,6 +147,8 @@ module MacOS extend self
     @clang_version ||=
       if (path = locate("clang"))
         %x{#{path} --version}[/(?:clang|LLVM) version (\d\.\d)/, 1]
+      else
+        Version::NULL
       end
   end
 
@@ -148,6 +156,8 @@ module MacOS extend self
     @clang_build_version ||=
       if (path = locate("clang"))
         %x{#{path} --version}[%r[clang-(\d{2,})], 1].to_i
+      else
+        Version::NULL
       end
   end
 
