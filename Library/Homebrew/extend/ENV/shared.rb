@@ -66,10 +66,12 @@ module SharedEnvExtension
   end
 
   def cc= val
+    raise "Requested compiler (#{val}) could not be found!" unless MacOS.locate(val)
     self['CC'] = self['OBJC'] = val.to_s
   end
 
   def cxx= val
+    raise "Requested compiler (#{val}) could not be found!" unless MacOS.locate(val)
     self['CXX'] = self['OBJCXX'] = val.to_s
   end
 
